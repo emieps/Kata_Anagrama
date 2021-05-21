@@ -1,11 +1,12 @@
 import time
+from typing import Dict
 
 def read_file(path): 
     with open(path) as f:
        for l in f:
             ana(l.rstrip("\n"))
 
-dic = {}
+dic: Dict = {}
 def ana(word):
     key = str(sorted(word))
     if key in dic:
@@ -15,16 +16,19 @@ def ana(word):
         dic[key].append(word)
 
 
+if __name__ == '__main__':
+    start_time = time.time()
+    read_file(r"C:\Users\Emily\Desktop\1.Tendencias\Tendencias en Desarrollo de Aplicaciones\Anagramatest\wordlist.txt")
 
-start_time = time.time()
-read_file(r"C:\Users\Emily\Desktop\1.Tendencias\Tendencias en Desarrollo de Aplicaciones\Anagramatest\wordlist.txt")
-end_time = time.time()
+    resul = ""
+    count = 0     
+    for key, value in dic.items():
+        if  len(value) > 1:    
+            resul += str(value) + '\n'
+            count += 1
 
 
-count = 0     
-for key, value in dic.items():
-    if  len(value) > 1:
-        print(value)
-        count += 1
-print(count)
-print(end_time-start_time )
+    print(resul)
+    end_time = time.time()
+    print(end_time-start_time )
+    print(count)
